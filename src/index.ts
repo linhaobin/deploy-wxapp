@@ -23,7 +23,7 @@ export function deploy(options: Options) {
 
   // 修改 project.config.json 的 appid
   if (!fs.existsSync(projectConfigJsonPath)) {
-    throw new Error("project.config.json 文件不存在");
+    throw new Error(`${projectConfigJsonPath}文件不存在`);
   }
 
   const projectConfigJson = require(projectConfigJsonPath);
@@ -36,7 +36,7 @@ export function deploy(options: Options) {
   if (extEnable) {
     // 修改 ext.json 的 extAppid
     if (!fs.existsSync(extJsonPath)) {
-      throw new Error("ext.json");
+      throw new Error(`${extJsonPath}文件不存在`);
     }
     const extJson = require(extJsonPath);
     extJson.extAppid = appId;
@@ -58,5 +58,5 @@ function getProjectPath(projectPath: string) {
   if (path.isAbsolute(projectPath)) {
     return projectPath;
   }
-  return path.join(__dirname, projectPath);
+  return path.join(process.cwd(), projectPath);
 }
