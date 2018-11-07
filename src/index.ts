@@ -28,6 +28,7 @@ export function deploy(options: Options) {
 
   const projectConfigJson = require(projectConfigJsonPath);
   projectConfigJson.appid = appId;
+  projectConfigJson.projectname = getProjectName(projectConfigJson.projectname);
   fs.writeFileSync(
     projectConfigJsonPath,
     JSON.stringify(projectConfigJson, null, 2)
@@ -59,4 +60,14 @@ function getProjectPath(projectPath: string) {
     return projectPath;
   }
   return path.join(process.cwd(), projectPath);
+}
+
+function getProjectName(projectName: string) {
+  const arr = projectName.split("-");
+  const ts = arr[arr.length - 1];
+  if (ts.length === 13 && parseInt(ts).toString() === ts) {
+    arr.pop();
+  }
+  arr.push(new Date().getTime().toString());
+  return arr.join("-");
 }
