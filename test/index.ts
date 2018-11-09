@@ -9,7 +9,6 @@ const appId = "wxc7124277285973fc";
 deployWxapp.deploy({
   wechatWebDevToolsCliPath,
   projectPath: '.dist',
-  extEnable: true,
   appId,
   version: "1.0.4"
 });
