@@ -45,13 +45,13 @@ export function deploy(options: Options) {
   // }
 
   // 上传代码
-  spawn.sync(
-    wechatWebDevToolsCliPath,
-    ["-o", "--upload", `${version}@${projectPath}`],
-    {
-      stdio: "inherit"
-    }
-  );
+  spawn.sync(wechatWebDevToolsCliPath, ["-o", projectPath], {
+    stdio: "inherit"
+  });
+  // 上传代码
+  spawn.sync(wechatWebDevToolsCliPath, ["-u", `${version}@${projectPath}`], {
+    stdio: "inherit"
+  });
 }
 
 function getProjectPath(projectPath: string) {
